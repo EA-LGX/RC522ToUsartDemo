@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "delay.h": "c",
+        "serial.h": "c"
+    },
+    "files.encoding": "gb2312"
+}
