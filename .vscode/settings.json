@@ -1,7 +1,8 @@
 {
     "files.associations": {
         "delay.h": "c",
-        "serial.h": "c"
+        "serial.h": "c",
+        "rc522.h": "c"
     },
     "files.encoding": "gb2312"
 }

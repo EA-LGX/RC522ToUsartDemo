@@ -4,28 +4,20 @@
 
 /*
 RC522射频模块外部的接口:
-*1--SDA <----->PF0--片选脚
-*2--SCK <----->PA5--时钟线
-*3--MOSI<----->PA7--输出
-*4--MISO<----->PA6--输入
+*1--SDA <----->PA5--片选脚
+*2--SCK <----->PA4--时钟线
+*3--MOSI<----->PA3--输出
+*4--MISO<----->PA2--输入  GPIO_Mode_IPU
 *5--悬空
 *6--GND <----->GND
-*7--RST <----->PF1--复位脚
+*7--RST <----->PA1--复位脚
 *8--VCC <----->VCC
 */
-
-//#define RC522_OUTPUT PAout(7)
-//#define RC522_INPUT PAin(6)
-//#define RC522_SCLK PAout(5)
-//#define RC522_CS PFout(0)
-//#define RC522_RST PFout(1)
-
-#define RC522_OUTPUT PCout(8)
-#define RC522_INPUT PBin(6)
-#define RC522_SCLK PCout(7)
-#define RC522_CS PCout(6)
-#define RC522_RST PCout(9)
-#define DOOR_OPEN PBout(7)
+#define RC522_OUTPUT PAout(3)
+#define RC522_INPUT PAin(2)
+#define RC522_SCLK PAout(4)
+#define RC522_CS PAout(5)
+#define RC522_RST PAout(1)
 
 //MF522命令字
 #define PCD_IDLE              0x00               //取消当前命令

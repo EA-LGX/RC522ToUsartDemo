@@ -3,20 +3,22 @@
 #include "OLED.h"
 #include "Serial.h"
 #include "RC522.h"
-
-extern unsigned char SN[4]; //å¡å·
+#include <string.h>
+extern unsigned char SN[4]; //¿¨ºÅ
 
 int main(void) {
 	Serial_Init();
 	delay_init();
-	RC522_Init(); //RC522åˆå§‹åŒ–
+	RC522_Init(); //RC522³õÊ¼»¯
 	while (1) {
 		if (read_card_data() == MI_OK) {
-			// è¯»å–åˆ°å¡å·
+			// ¶ÁÈ¡µ½¿¨ºÅ
 			u8 card_id[20] = { 0 };
 			for (int i = 0;i < 4;i++) {
 				sprintf(&card_id[i * 2], "%02X", SN[i]);
 			}
+			printf("ID: %s\r\n", card_id);
+			delay_ms(2000);
 		}
 	}
 }

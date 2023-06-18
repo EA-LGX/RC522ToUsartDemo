@@ -27,7 +27,19 @@ Project File Date:  06/17/2023
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
-".\Objects\Project.axf" - 0 Error(s), 0 Warning(s).
+compiling main.c...
+.\Hardware\RC522.h(161): warning:  #1295-D: Deprecated declaration notarize_type1 - give arg types
+  void  notarize_type1();
+.\Hardware\RC522.h(162): warning:  #1295-D: Deprecated declaration notarize_type3 - give arg types
+  void  notarize_type3();
+User\main.c(14): warning:  #223-D: function "read_card_data" declared implicitly
+  		if (read_card_data() == MI_OK) {
+User\main.c(18): warning:  #167-D: argument of type "u8 *" is incompatible with parameter of type "char *restrict"
+  				sprintf(&card_id[i * 2], "%02X", SN[i]);
+User\main.c: 4 warnings, 0 errors
+linking...
+Program Size: Code=6988 RO-data=268 RW-data=148 ZI-data=1028  
+".\Objects\Project.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -40,7 +52,7 @@ Package Vendor: Keil
   C:\Users\11752\AppData\Local\Arm\Packs\Keil\STM32F1xx_DFP\2.3.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>

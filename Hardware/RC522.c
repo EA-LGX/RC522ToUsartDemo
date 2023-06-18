@@ -64,10 +64,10 @@ int read_card() {
 	{
 		status = MI_ERR;
 		status = RC522_PcdAnticoll(SN);  //防冲撞，成功返回0，SN是读到卡号的地址
-		printf("卡类型:");
-		print_info(CT, 2);//打印类型
-		printf("卡号:");
-		print_info(SN, 4);//打印卡号
+		// printf("卡类型:");
+		// print_info(CT, 2);//打印类型
+		// printf("卡号:");
+		// print_info(SN, 4);//打印卡号
 	}
 	if (status == MI_OK) {
 		status = MI_ERR;
@@ -169,8 +169,8 @@ u8 read_card_data() {
 		status = RC522_PcdRead(2, data); //从第addr块读出数据值。
 	}
 	if (status == MI_OK) {
-		printf("read data\r\n");
-		print_info(data, 16);
+		//printf("read data\r\n");
+		//print_info(data, 16);
 	}
 	return status;
 }
@@ -201,34 +201,30 @@ u8 RC522_SPI_ReadWriteOneByte(u8 tx_data) {
 
 /*
 RC522射频模块外部的接口:
-*1--SDA <----->PC6--片选脚
-*2--SCK <----->PC7--时钟线
-*3--MOSI<----->PC8--输出
-*4--MISO<----->PB6--输入
+*1--SDA <----->PA5--片选脚
+*2--SCK <----->PA4--时钟线
+*3--MOSI<----->PA3--输出
+*4--MISO<----->PA2--输入  GPIO_Mode_IPU
 *5--悬空
 *6--GND <----->GND
-*7--RST <----->PC9--复位脚
+*7--RST <----->PA1--复位脚
 *8--VCC <----->VCC
 */
 
 void RC522_IO_Init(void) {
-	// GPIO_InitTypeDef  GPIO_InitStructure;
+	GPIO_InitTypeDef  GPIO_InitStructure;
 	// RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);        //使能PC端口时钟
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);        //使能PB端口时钟
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);        //使能PB端口时钟
 
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_3 | GPIO_Pin_4| GPIO_Pin_5;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;      //推挽输出
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;     //IO口速度为50MHz
-	GPIO_Init(GPIOC, &GPIO_InitStructure);
-	GPIO_SetBits(GPIOC, GPIO_Pin_6 | GPIO_Pin_7 | GPIO_Pin_8 | GPIO_Pin_9);  //拉高
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	GPIO_SetBits(GPIOA, GPIO_Pin_1 | GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5);  //拉高
 
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;      //上拉输入
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
-
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_7;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;      //上拉输入
-	GPIO_Init(GPIOB, &GPIO_InitStructure);
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
 }
 
 
